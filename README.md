@@ -1,73 +1,158 @@
-# React + TypeScript + Vite
+# Todoist Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A fully functional Todoist clone built with React, TypeScript, and Tailwind CSS. This web-based task management application replicates the core features of Todoist, providing a clean and intuitive interface for managing tasks and projects.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Task Management
+- **Create tasks** with quick add functionality
+- **Edit tasks** inline by clicking on them
+- **Delete tasks** with confirmation
+- **Complete tasks** with visual checkbox feedback
+- **Task descriptions** for additional context
+- **Priority levels** (P1-P4) with color-coded indicators
+- **Due dates** with natural language parsing
 
-## React Compiler
+### Views
+- **Inbox** - Default project for quick task capture
+- **Today** - Shows tasks due today and overdue tasks
+- **Upcoming** - Displays tasks grouped by due date
+- **Projects** - Custom project views for organizing tasks
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Projects
+- **Create projects** with randomized colors
+- **Delete projects** (tasks move to Inbox)
+- **Color-coded** project indicators
+- **Project-specific** task views
 
-## Expanding the ESLint configuration
+### Smart Features
+- **Natural language date parsing**
+  - "today" - Sets due date to today
+  - "tomorrow" - Sets due date to tomorrow
+  - "in 3 days" - Sets due date 3 days from now
+  - Standard date formats (MMM d, yyyy-MM-dd, etc.)
+- **Local storage persistence** - All data saved automatically
+- **Responsive design** - Works on desktop and mobile
+- **Keyboard shortcuts** - Enter to save, Escape to cancel
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React 18** - UI framework
+- **TypeScript** - Type safety
+- **Vite** - Build tool and dev server
+- **Tailwind CSS** - Styling
+- **date-fns** - Date manipulation
+- **lucide-react** - Icon library
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Getting Started
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Prerequisites
+- Node.js 16+
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+```bash
+git clone <repository-url>
+cd claudecodetest
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. Install dependencies
+```bash
+npm install
 ```
+
+3. Start the development server
+```bash
+npm run dev
+```
+
+4. Open your browser to `http://localhost:5173`
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+The built files will be in the `dist` directory.
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```
+src/
+├── components/
+│   ├── AddTask.tsx      # Task creation component
+│   ├── Sidebar.tsx      # Navigation and project list
+│   ├── TaskItem.tsx     # Individual task display
+│   └── TaskList.tsx     # Task list with filtering
+├── context/
+│   └── AppContext.tsx   # Global state management
+├── utils/
+│   └── storage.ts       # localStorage utilities
+├── types.ts             # TypeScript type definitions
+├── App.tsx              # Main app component
+├── main.tsx             # App entry point
+└── index.css            # Global styles
+```
+
+## Usage
+
+### Adding Tasks
+1. Click "Add task" or press the plus button
+2. Enter task name (required)
+3. Optionally add description, due date, priority, and select project
+4. Press Enter or click "Add task"
+
+### Managing Tasks
+- **Complete**: Click the checkbox
+- **Edit**: Click on the task text
+- **Delete**: Hover and click the trash icon
+
+### Creating Projects
+1. Click the "+" next to "Projects" in the sidebar
+2. Enter project name
+3. Press Enter or click away
+
+### Setting Due Dates
+Use natural language in the due date field:
+- "today"
+- "tomorrow"
+- "in 5 days"
+- "Jan 15"
+- "2024-12-25"
+
+### Priority Levels
+- **P1** (Red) - Urgent
+- **P2** (Orange) - High
+- **P3** (Blue) - Medium
+- **P4** (Gray) - Low (default)
+
+## Data Persistence
+
+All data is stored in the browser's localStorage:
+- Tasks persist across sessions
+- Projects persist across sessions
+- Data is stored per browser/device
+
+To clear all data, open browser console and run:
+```javascript
+localStorage.clear()
+```
+
+## Browser Support
+
+- Chrome/Edge (latest)
+- Firefox (latest)
+- Safari (latest)
+
+## License
+
+MIT
